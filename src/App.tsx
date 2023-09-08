@@ -1,25 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import TodoList from './components/TodoList';
+import {
+  Box,
+  CircularProgress,
+  Container,
+  Divider,
+  Grid,
+  TextField,
+  Typography,
+} from '@mui/material';
+import AddTodo from './components/AddTodo';
+import ContextProvider from './store/ContextProvider';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ContextProvider>
+      <Container sx={{ margin: '0 auto', width: '600px', paddingTop: '5rem', }}>
+        <Typography variant="h1">todos</Typography>
+        <Box>
+          <AddTodo />
+          <TodoList />
+        </Box>
+      </Container>
+    </ContextProvider>
   );
 }
 
