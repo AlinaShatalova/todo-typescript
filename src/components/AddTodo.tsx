@@ -1,17 +1,6 @@
 import { useState, ChangeEvent, FormEvent, useContext } from 'react';
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Container,
-  Divider,
-  FormControl,
-  Grid,
-  Input,
-  OutlinedInput,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Button, FormControl, OutlinedInput } from '@mui/material';
+import { pink } from '@mui/material/colors';
 import TodosContext from '../store/context';
 
 const AddTodo = () => {
@@ -24,7 +13,7 @@ const AddTodo = () => {
 
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
-  
+
     if (value.trim()) {
       addTodoHandler(value);
       setValue('');
@@ -32,13 +21,25 @@ const AddTodo = () => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form style={{ paddingTop: '24px' }} onSubmit={submitHandler}>
       <FormControl fullWidth>
-        <Input
+        <OutlinedInput
           placeholder="What needs to be done?"
           value={value}
           onChange={changeTextHandler}
-          endAdornment={<Button type="submit">Add</Button>}
+          endAdornment={
+            <Button
+              type="submit"
+              sx={{
+                color: pink[400],
+                '&:hover': {
+                  backgroundColor: pink[50],
+                },
+              }}
+            >
+              Add
+            </Button>
+          }
         />
       </FormControl>
     </form>

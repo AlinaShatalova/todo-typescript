@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import TodosContext from './context';
-import { TodoContextType } from '../types';
+import { TodoContextType, TodoStatus } from '../types';
 import { uniqueId } from 'lodash';
 
 type ContextProviderPropsType = {
@@ -13,6 +13,16 @@ const ContextProvider = ({ children }: ContextProviderPropsType) => {
     { id: uniqueId(), completed: false, name: 'Buy bread' },
   ]);
 
+  const activeTasks = useMemo(() => {
+    return todos.filter(todo => !todo.completed);
+  }, [todos]);
+
+  const completedTasks = useMemo(() => {
+    return todos.filter(todo => todo.completed);
+  }, [todos]);
+
+  const [status, setStatus] = useState(TodoStatus.All);
+
   const addTodoHandler = (text: string): void => {
     const newTodo = {
       id: uniqueId(),
@@ -24,19 +34,34 @@ const ContextProvider = ({ children }: ContextProviderPropsType) => {
   };
 
   const toggleTodoHandler = (id: string) => {
-    setTodos(todos.map((todo) => {
-      if (todo.id === id) {
-        todo.completed = !todo.completed;
-      }
+    setTodos(
+      todos.map(todo => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed;
+        }
 
-      return todo;
-    }))
+        return todo;
+      })
+    );
+  };
+
+  const changeStatusHandler = (currentStatus: TodoStatus) => {
+    setStatus(currentStatus);
+  };
+
+  const removeCompletedHandler = () => {
+    setTodos(todos.filter(todo => !todo.completed));
   };
 
   const contextValue: TodoContextType = {
     todos,
+    status,
+    activeTasks,
+    completedTasks,
     addTodoHandler,
     toggleTodoHandler,
+    changeStatusHandler,
+    removeCompletedHandler,
   };
 
   return (
