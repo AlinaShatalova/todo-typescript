@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { Box, Button, Typography } from '@mui/material';
-import { pink } from '@mui/material/colors';
 import Navigation from './Navigation';
 import TodosContext from '../store/context';
 
@@ -23,18 +22,7 @@ const Menu = () => {
     >
       <Typography>{tasksLeft}</Typography>
       <Navigation />
-      <Button
-        variant="outlined"
-        onClick={removeCompletedHandler}
-        sx={{
-          color: pink[400],
-          borderColor: pink[200],
-          '&:hover': {
-            backgroundColor: pink[50],
-            borderColor: pink[300],
-          },
-        }}
-      >
+      <Button variant="outlined" onClick={removeCompletedHandler}>
         Clear completed
       </Button>
     </Box>
