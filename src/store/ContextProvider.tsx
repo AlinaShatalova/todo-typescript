@@ -9,8 +9,8 @@ type ContextProviderPropsType = {
 
 const ContextProvider = ({ children }: ContextProviderPropsType) => {
   const [todos, setTodos] = useState([
-    { id: uniqueId(), completed: false, name: 'Buy milk' },
-    { id: uniqueId(), completed: false, name: 'Buy bread' },
+    { id: uniqueId(), completed: false, name: 'Learn how to test React apps' },
+    { id: uniqueId(), completed: false, name: 'Refactor code' },
   ]);
 
   const activeTasks = useMemo(() => {
