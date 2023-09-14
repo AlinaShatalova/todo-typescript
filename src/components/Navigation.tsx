@@ -26,6 +26,7 @@ const Navigation = () => {
       <ListItemButton
         selected={selectedItem === TodoStatus.Active}
         onClick={() => handleListItemClick(TodoStatus.Active)}
+        data-testid='active-button'
       >
         <ListItemText primary="Active" />
       </ListItemButton>

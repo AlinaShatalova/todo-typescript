@@ -27,6 +27,7 @@ const AddTodo = () => {
       onSubmit={submitHandler}
     >
       <TextField
+        role="textbox"
         placeholder="What needs to be done?"
         value={value}
         onChange={changeTextHandler}
